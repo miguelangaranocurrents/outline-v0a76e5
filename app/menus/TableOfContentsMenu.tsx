@@ -28,8 +28,9 @@ function TableOfContentsMenu() {
     Infinity
   );
   const headingPrefix =
-    documentContext.document?.getPreference(DocumentPreference.HeadingPrefix) ??
-    HeadingPrefixStyle.None;
+    (documentContext.document && "getPreference" in documentContext.document
+      ? documentContext.document.getPreference(DocumentPreference.HeadingPrefix)
+      : undefined) ?? HeadingPrefixStyle.None;
 
   const headingActions = useMemo(() => {
     // Compute prefix labels over all headings so they match the numbering
